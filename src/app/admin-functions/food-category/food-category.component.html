@@ -1,8 +1,4 @@
-<div class="container">
-<app-food-category></app-food-category>
-</div>
 
-<div class="container">
 <kendo-grid
       #grid
       [data]="view | async"
@@ -24,35 +20,35 @@
         <button kendoGridAddCommand>Add new</button>
         <button
           kendoButton
-          [disabled]="!editService.hasChanges()"
+          [disabled]="!categoryService.hasChanges()"
           (click)="saveChanges(grid)"
         >
           Save Changes
         </button>
         <button
           kendoButton
-          [disabled]="!editService.hasChanges()"
+          [disabled]="!categoryService.hasChanges()"
           (click)="cancelChanges(grid)"
         >
           Cancel Changes
         </button>
       </ng-template>
      
+      
       <kendo-grid-column
-        field="itemName"
-        title="Food Item Name"
+        field="menuCategoryId"
+        
+        title="Category Id"
+        [editable]="false"
       ></kendo-grid-column>
-      <kendo-grid-column
-        field="price"
-        editor="numeric"
-        title="Price"
-      ></kendo-grid-column>
-      <kendo-grid-column field="categoryId" title="Category ID"></kendo-grid-column>
 
       <kendo-grid-column
-        field="description"
-        title="Description"
+        field="categoryName"
+        title="Category Name"
       ></kendo-grid-column>
+
+
+      
       <kendo-grid-command-column title="command" [width]="220">
         <ng-template kendoGridCellTemplate let-isNew="isNew">
           <button kendoGridRemoveCommand>Remove</button>
@@ -61,4 +57,3 @@
         </ng-template>
       </kendo-grid-command-column>
     </kendo-grid>
-  </div>

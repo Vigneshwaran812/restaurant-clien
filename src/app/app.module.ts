@@ -82,6 +82,7 @@ import { BlogCardsComponent } from './dashboard copy/dashboard-components/blog-c
 import { FoodItemComponent } from './admin-functions/food-item/food-item.component';
 import { DashboardModule } from './dashboard copy/dashboard.module';
 import { EditService } from './admin-functions/food-item/edit.service';
+import { CategoryService } from './admin-functions/food-category/edit-category.service';
 
 
 
@@ -166,6 +167,7 @@ import { EditService } from './admin-functions/food-item/edit.service';
   providers: [ConfirmationService,
     MessageService,DialogService,
     EditService,
+
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   

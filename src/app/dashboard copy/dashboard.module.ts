@@ -17,6 +17,11 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { FoodItemComponent } from "app/admin-functions/food-item/food-item.component";
 import { DiningTableComponent } from "app/admin-functions/dining-table/dining-table.component";
 import { ComponentsRoutes } from "app/admin-functions/admin-functions.routing";
+import { ReviewComponent } from "app/admin-functions/review/review.component";
+import { CarouselModule } from 'primeng/carousel';
+
+import { CardModule } from "primeng/card";
+import { FoodCategoryComponent } from "app/admin-functions/food-category/food-category.component";
 
 
 
@@ -104,7 +109,9 @@ const routes: Routes = [
     FormsModule,
     ButtonsModule,
     InputsModule,
-    GridModule
+    GridModule,
+    CarouselModule,
+    CardModule
   
   ],
 
@@ -116,7 +123,9 @@ const routes: Routes = [
     TopCardsComponent,
     BlogCardsComponent,
     FoodItemComponent,
-
+    DiningTableComponent,
+    ReviewComponent,
+    FoodCategoryComponent
   ],
   //bootstrap : [CustomerDetailsComponent]
 })

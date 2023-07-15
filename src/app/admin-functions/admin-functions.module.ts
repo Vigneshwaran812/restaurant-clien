@@ -14,6 +14,7 @@ import { EditService } from "./food-item/edit.service";
 
 
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,11 +22,13 @@ import { EditService } from "./food-item/edit.service";
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-  
+    
  
    
   ],
-  declarations: [],
+  declarations: [
+    
+  ],
   
 })
 

@@ -1,6 +1,3 @@
-
-
-
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from "rxjs";
@@ -22,19 +19,18 @@ import { State, process } from "@progress/kendo-data-query";
 
 import { Keys } from "@progress/kendo-angular-common";
 
-import { DiningTable } from './dining-table';
-import { DiningService } from "./dining-table-edit.service";
+import { FoodCategory } from './food-category-data';
+import { CategoryService } from './edit-category.service';
 import { map } from "rxjs/operators";
 
 
-
 @Component({
-  selector: 'app-dining-table',
-  templateUrl: './dining-table.component.html',
-  styleUrls: ['./dining-table.component.scss'],
-  providers: [DiningService],
+  selector: 'app-food-category',
+  templateUrl: './food-category.component.html',
+  styleUrls: ['./food-category.component.scss'],
+  providers: [CategoryService],
 })
-export class DiningTableComponent implements OnInit{
+export class FoodCategoryComponent implements OnInit{
   public view?: Observable<GridDataResult>;
   public gridState: State = {
     sort: [],
@@ -46,20 +42,20 @@ export class DiningTableComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    public diningService: DiningService
+    public categoryService: CategoryService
   ) {}
 
   public ngOnInit(): void {
-    this.view = this.diningService.pipe(
+    this.view = this.categoryService.pipe(
       map((data) => process(data, this.gridState))
     );
 
-    this.diningService.read();
+    this.categoryService.read();
   }
   public onStateChange(state: State): void {
     this.gridState = state;
 
-    this.diningService.read();
+    this.categoryService.read();
   }
 
   public cellClickHandler(args: CellClickEvent): void {
@@ -82,13 +78,13 @@ export class DiningTableComponent implements OnInit{
         return;
       }
 
-      this.diningService.assignValues(dataItem, formGroup.value);
-      this.diningService.update(dataItem);
+      this.categoryService.assignValues(dataItem, formGroup.value);
+      this.categoryService.update(dataItem);
     }
   }
 
   public addHandler(args: AddEvent): void {
-    args.sender.addRow(this.createFormGroup(new DiningTable()));
+    args.sender.addRow(this.createFormGroup(new FoodCategory()));
   }
 
   public cancelHandler(args: CancelEvent): void {
@@ -96,13 +92,13 @@ export class DiningTableComponent implements OnInit{
   }
   public saveHandler(args: SaveEvent): void {
     if (args.formGroup.valid) {
-      this.diningService.create(args.formGroup.value);
+      this.categoryService.create(args.formGroup.value);
       args.sender.closeRow(args.rowIndex);
     }
   }
 
   public removeHandler(args: RemoveEvent): void {
-    this.diningService.remove(args.dataItem);
+    this.categoryService.remove(args.dataItem);
 
     args.sender.cancelCell();
   }
@@ -110,24 +106,21 @@ export class DiningTableComponent implements OnInit{
     grid.closeCell();
     grid.cancelCell();
 
-    this.diningService.saveChanges();
+    this.categoryService.saveChanges();
   }
 
   public cancelChanges(grid: GridComponent): void {
     grid.cancelCell();
 
-    this.diningService.cancelChanges();
+    this.categoryService.cancelChanges();
   }
-  public createFormGroup(dataItem: DiningTable): FormGroup {
+  public createFormGroup(dataItem: FoodCategory): FormGroup {
     return this.formBuilder.group({
-      tableId: dataItem.tableId,
-      tableNumber: [dataItem.tableNumber, Validators.required],
       
-      capacity: dataItem.capacity,
+      categoryId: dataItem.menuCategoryId,
+      categoryName: [dataItem.categoryName, Validators.required],
       
     });
   }
 
 }
-
-

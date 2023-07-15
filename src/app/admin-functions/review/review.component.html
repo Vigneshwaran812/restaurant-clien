@@ -1,1 +1,14 @@
-<p>review works!</p>
+
+<div class="carousel-container">
+<p-carousel [value]="reviews">
+    <ng-template let-review pTemplate="item">
+      <p-card>
+        <div class="review-item">
+          <b><h4>{{ review.name }}</h4></b>
+          <p>{{ review.review }}</p>
+        </div>
+      </p-card>
+    </ng-template>
+  </p-carousel>
+</div>
+  

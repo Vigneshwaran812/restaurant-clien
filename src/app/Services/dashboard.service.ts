@@ -30,4 +30,10 @@ export class DashboardService {
     const url = 'https://localhost:7135/api/FoodItemsControllerAdmin/CountFoodItems';
     return this.http.get<ServiceResponse<any>>(url);
   }
+   
+  getReviews(): Observable<ServiceResponse<any[]>>
+  {
+    const url = 'https://localhost:7135/CustomerReviews';
+    return this.http.get<ServiceResponse<any>>(url);
+  }
 }
